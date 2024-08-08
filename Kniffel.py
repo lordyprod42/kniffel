@@ -11,7 +11,6 @@ import random
 #players = int(spieler)
 
 
-
 class PointTable:
         
     def __init__(self,player):
@@ -77,40 +76,49 @@ die_4 = Dice()
 die_5 = Dice()
 
 thrown_dice = {"W1":0,"W2":0,"W3":0,"W4":0,"W5":0}
-throw_counter = 0
+
+
 def throw_dice():
-    if throw_counter <=3:
-        throw_counter +=1
-        thrown_dice["W1"] = die_1.roll_die()
-        thrown_dice["W2"] = die_2.roll_die()
-        thrown_dice["W3"] = die_3.roll_die()
-        thrown_dice["W4"] = die_4.roll_die()
-        thrown_dice["W5"] = die_5.roll_die()
+        if thrown_dice["W1"] == 0:thrown_dice["W1"] = die_1.roll_die()
+        if thrown_dice["W2"] == 0:thrown_dice["W2"] = die_2.roll_die()
+        if thrown_dice["W3"] == 0:thrown_dice["W3"] = die_3.roll_die()
+        if thrown_dice["W4"] == 0:thrown_dice["W4"] = die_4.roll_die()
+        if thrown_dice["W5"] == 0:thrown_dice["W5"] = die_5.roll_die()
         return thrown_dice
-inputs = input("press a key")
-if inputs:
- print(throw_dice())
-hold = input("welche Würfel halten?(1,2,3,4 oder 5):")
 
-for number in hold:
-    if number =="1": 
-        die_1.save_die
-        saved_dice.append(thrown_dice["W1"])
-    if number =="2": 
-        die_2.save_die
-        saved_dice.append(thrown_dice["W2"])
 
-    if number =="3": 
-        die_3.save_die
-        saved_dice.append(thrown_dice["W3"])
+def player_turn():
+    count = 0
+    for turn in range(0,3):
+        count +=1
+        inputs = input("würfeln?")
+        print(throw_dice())
+        hold = input("welche Würfel halten?(1,2,3,4 oder 5):")
+        for number in hold:
+            if number =="1": 
+                die_1.save_die
+                saved_dice.append(thrown_dice["W1"])
+            else:thrown_dice ["W1"] = 0
 
-    if number =="4":
-        die_4.save_die
-        saved_dice.append(thrown_dice["W4"])
+            if number =="2": 
+                die_2.save_die
+                saved_dice.append(thrown_dice["W2"])
+            else:thrown_dice ["W2"] = 0
 
-    if number =="5":
-        die_5.save_die
-        saved_dice.append(thrown_dice["W5"])
+            if number =="3": 
+                die_3.save_die
+                saved_dice.append(thrown_dice["W3"])
+            else:thrown_dice ["W3"] = 0
 
-print(saved_dice)
+            if number =="4":
+                die_4.save_die
+                saved_dice.append(thrown_dice["W4"])
+            else:thrown_dice ["W4"] = 0
 
+            if number =="5":
+                die_5.save_die
+                saved_dice.append(thrown_dice["W5"])
+            else:thrown_dice ["W5"] = 0
+
+    print(saved_dice)
+player_turn()
