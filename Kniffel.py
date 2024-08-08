@@ -60,12 +60,13 @@ class Dice:
     saved = False
 
     def __init__(self):
-        pass
+        self.eyes = 0
     
 
     def roll_die(self):
-        if not Dice.saved: return random.randint(1,6)
-    
+        if Dice.saved == False: 
+            eyes = random.randint(1,6)
+        return eyes
     def save_die(self):
         Dice.saved = True
 
@@ -78,47 +79,75 @@ die_5 = Dice()
 thrown_dice = {"W1":0,"W2":0,"W3":0,"W4":0,"W5":0}
 
 
-def throw_dice():
-        if thrown_dice["W1"] == 0:thrown_dice["W1"] = die_1.roll_die()
-        if thrown_dice["W2"] == 0:thrown_dice["W2"] = die_2.roll_die()
-        if thrown_dice["W3"] == 0:thrown_dice["W3"] = die_3.roll_die()
-        if thrown_dice["W4"] == 0:thrown_dice["W4"] = die_4.roll_die()
-        if thrown_dice["W5"] == 0:thrown_dice["W5"] = die_5.roll_die()
+def throw_dice(würfel):
+        if 1 in würfel:thrown_dice["W1"] = die_1.roll_die()
+        if 2 in würfel:thrown_dice["W2"] = die_2.roll_die()
+        if 3 in würfel:thrown_dice["W3"] = die_3.roll_die()
+        if 4 in würfel:thrown_dice["W4"] = die_4.roll_die()
+        if 5 in würfel:thrown_dice["W5"] = die_5.roll_die()
         return thrown_dice
 
 
 def player_turn():
     count = 0
+    würfel = [1,2,3,4,5]
     for turn in range(0,3):
         count +=1
         inputs = input("würfeln?")
-        print(throw_dice())
-        hold = input("welche Würfel halten?(1,2,3,4 oder 5):")
-        for number in hold:
-            if number =="1": 
-                die_1.save_die
-                saved_dice.append(thrown_dice["W1"])
-            else:thrown_dice ["W1"] = 0
+        throw_dice(würfel)
+        print("dein wurf: "+"\n"
+              "Würfel 1: "+str(thrown_dice["W1"])+"\n"+
+              "Würfel 2: " +str(thrown_dice["W2"])+"\n"+
+              "Würfel 3: " +str(thrown_dice["W3"])+"\n"+
+              "Würfel 4: " +str(thrown_dice["W4"])+"\n"+
+              "Würfel 5: " +str(thrown_dice["W5"])+"\n"
+              
+              )
+        if count == 3:
+            for wurf in würfel:
+                saved_dice.append(wurf)
+            break
+        else:
+            hold = input("welche Würfel halten?"+str(würfel)+":")
 
-            if number =="2": 
-                die_2.save_die
-                saved_dice.append(thrown_dice["W2"])
-            else:thrown_dice ["W2"] = 0
+        if "1" in hold and die_1.saved == False: 
+            die_1.save_die
+            saved_dice.append(thrown_dice["W1"])
+            würfel.pop(würfel.index(1))
 
-            if number =="3": 
-                die_3.save_die
-                saved_dice.append(thrown_dice["W3"])
-            else:thrown_dice ["W3"] = 0
+        if "2" in hold and die_2.saved == False: 
+            die_2.save_die
+            saved_dice.append(thrown_dice["W2"])
+            würfel.pop(würfel.index(2))
 
-            if number =="4":
-                die_4.save_die
-                saved_dice.append(thrown_dice["W4"])
-            else:thrown_dice ["W4"] = 0
+        if "3" in hold and die_3.saved == False: 
+            die_3.save_die
+            saved_dice.append(thrown_dice["W3"])
+            würfel.pop(würfel.index(3))
 
-            if number =="5":
-                die_5.save_die
-                saved_dice.append(thrown_dice["W5"])
-            else:thrown_dice ["W5"] = 0
+        if "4" in hold and die_4.saved == False:
+            die_4.save_die
+            saved_dice.append(thrown_dice["W4"])
+            würfel.pop(würfel.index(4))
 
-    print(saved_dice)
+        if "5" in hold and die_5.saved == False:
+            die_5.save_die
+            saved_dice.append(thrown_dice["W5"])
+            würfel.pop(würfel.index(5))
+        if len(würfel) == 0:break   
+    print("dein gewerteter wurf: "+"\n"
+              "Würfel 1: "+str(saved_dice[0])+"\n"+
+              "Würfel 2: " +str(saved_dice[1])+"\n"+
+              "Würfel 3: " +str(saved_dice[2])+"\n"+
+              "Würfel 4: " +str(saved_dice[3])+"\n"+
+              "Würfel 5: " +str(saved_dice[4])+"\n"
+             )
 player_turn()
+
+#def throw_one():
+    #inputs = input("Würfeln?")
+    #thrown_dice["W1"] = die_1.roll_die()
+    #thrown_dice["W2"] = die_2.roll_die()
+    #thrown_dice["W3"] = die_3.roll_die()
+    #thrown_dice["W4"] = die_4.roll_die()
+    #thrown_dice["W5"] = die_5.roll_die()
