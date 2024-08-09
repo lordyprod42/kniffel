@@ -41,11 +41,11 @@ print ("""
 players = 1
 
 def ask_for_players():
-    spieler = input("wieviele mitspieler gibt es heute?(max 4)(eingeben:1,2,3,4:)")
+    spieler = input("how much players do we have today?(max 4)(input:1,2,3,4):")
     if spieler == "exit":exit()
     #elif spieler is not range(1,4,1):ask_for_players()
     if int(spieler) >4 : spieler = "4"
-    print("also: " +spieler + " spielen heute mit.")
+    print("so " +spieler + " play today."+"\n")
     players = int(spieler)
 
 ask_for_players()
@@ -55,20 +55,20 @@ class pointtable:
     def __init__(self,player):
         self.my_player = player
         self.all_points = 0
-        self.points_teil_1 = 0
-        self.points_teil_2 = 0
-        self.points_einser = -1
-        self.points_zweier = -1
-        self.points_dreier = -1
-        self.points_vierer = -1
-        self.points_fünfer = -1
-        self.points_sechser = -1
+        self.points_teil_1 = 0 #points part one
+        self.points_teil_2 = 0 #points part two
+        self.points_einser = -1 #points aces
+        self.points_zweier = -1 #points twos
+        self.points_dreier = -1 #points threes
+        self.points_vierer = -1 #points fours
+        self.points_fünfer = -1 #points fives
+        self.points_sechser = -1 #points sixes
 
-        self.dreier_pasch = -1
-        self.vierer_pasch = -1
-        self.full_house = -1
-        self.kleine_strasse = -1
-        self.grosse_strasse = -1
+        self.dreier_pasch = -1 #points 3 of kind
+        self.vierer_pasch = -1 #points 4 of kind
+        self.full_house = -1 # points full house
+        self.kleine_strasse = -1 #points small straight
+        self.grosse_strasse = -1 #points large straight
         self.kniffel = -1
         self.chance = -1
         
@@ -76,17 +76,17 @@ class pointtable:
 
     def print_table(self):
         print("player: "+str(self.my_player))
-        print("nur einser: " +str(self.points_einser))
-        print("nur zweier: " +str(self.points_zweier))
-        print("nur dreier: " +str(self.points_dreier))
-        print("nur vierer: " +str(self.points_vierer))
-        print("nur fünfer: " +str(self.points_fünfer))
-        print("nur sechser: " + str(self.points_sechser))
-        print("dreier pasch: " + str(self.dreier_pasch))
-        print("vierer pasch: " + str(self.vierer_pasch))
+        print("aces: " +str(self.points_einser))
+        print("twos: " +str(self.points_zweier))
+        print("threes: " +str(self.points_dreier))
+        print("fours: " +str(self.points_vierer))
+        print("fives: " +str(self.points_fünfer))
+        print("sixes: " + str(self.points_sechser))
+        print("3 of kind: " + str(self.dreier_pasch))
+        print("4 of kind: " + str(self.vierer_pasch))
         print("full house: " + str(self.full_house))
-        print("kleine straße: " +str(self.kleine_strasse))
-        print("große straße: "+str(self.grosse_strasse))
+        print("small straight: " +str(self.kleine_strasse))
+        print("large straight: "+str(self.grosse_strasse))
         print("kniffel: " +str(self.kniffel))
         print("chance: "+str(self.chance)+"\n")
 
@@ -167,15 +167,15 @@ def player_turn(player):
     elif player == 4:player_4_points.print_table()
     for turn in range(0,3):
         count +=1
-        input12 = input("spieler "+str(player)+" würfeln?"+"\n")
+        input12 = input("player "+str(player)+" roll dice?"+"\n")
         if input12 == "exit":exit()
         throw_dice(würfel)
-        print("dein wurf: "+"\n"
-              "würfel 1: "+str(thrown_dice["w1"])+"\n"+
-              "würfel 2: " +str(thrown_dice["w2"])+"\n"+
-              "würfel 3: " +str(thrown_dice["w3"])+"\n"+
-              "würfel 4: " +str(thrown_dice["w4"])+"\n"+
-              "würfel 5: " +str(thrown_dice["w5"])+"\n"
+        print("your roll "+"\n"
+              "dice 1: "+str(thrown_dice["w1"])+"\n"+
+              "dice 2: " +str(thrown_dice["w2"])+"\n"+
+              "dice 3: " +str(thrown_dice["w3"])+"\n"+
+              "dice 4: " +str(thrown_dice["w4"])+"\n"+
+              "dice 5: " +str(thrown_dice["w5"])+"\n"
               
               )
         if count == 3:
@@ -187,7 +187,7 @@ def player_turn(player):
                 if wurf == 5:saved_dice.append(thrown_dice["w5"])
         else:
             hold = ""
-            hold = input("welche würfel halten?"+str(würfel)+":")
+            hold = input("hold wich dice?"+str(würfel)+":")
         if hold =="exit":exit()
         # checks the input and takes the dice out of the throw dice pool and in the saved dice pool
         for number in hold:
@@ -220,8 +220,8 @@ def player_turn(player):
                 würfel_out.append(5)
         if len(würfel) == 0:break
         if count == 2:
-            input24 = input("weiter?"+"\n")
-            back=input("welche würfel wieder würfeln?"+str(würfel_out)+":")
+            input24 = input("go on?"+"\n")
+            back=input("wich saved dice you wanne roll again?"+str(würfel_out)+":")
             if back =="exit":exit()
             #reverses the poping of a dice to put it back in the dice pool
             for number in back:
@@ -253,7 +253,7 @@ def player_turn(player):
 
 
 
-    input23=input("weiter?"+"\n")
+    input23=input("go on?"+"\n")
     score_points(player)
 
 def score_points(player):
@@ -267,28 +267,28 @@ def score_points(player):
     elif player == 4:
         table = player_4_points
     table.print_table()
-    print("dein gewerteter wurf: "+"\n"
-          "würfel 1: "+str(saved_dice[0])+"\n"+
-          "würfel 2: " +str(saved_dice[1])+"\n"+
-          "würfel 3: " +str(saved_dice[2])+"\n"+
-          "würfel 4: " +str(saved_dice[3])+"\n"+
-          "würfel 5: " +str(saved_dice[4])+"\n"
+    print("your roll to score: "+"\n"
+          "roll 1: "+str(saved_dice[0])+"\n"+
+          "roll 2: " +str(saved_dice[1])+"\n"+
+          "roll 3: " +str(saved_dice[2])+"\n"+
+          "roll 4: " +str(saved_dice[3])+"\n"+
+          "roll 5: " +str(saved_dice[4])+"\n"
           )
-    score_input = input("wo möchtest du dein punkte eintragen: ")
+    score_input = input("where do you wanne put your score: ")
     if score_input == "exit":exit()
-    elif score_input =="einser":get_points(player,1)        
-    elif score_input =="zweier":get_points(player,2)
-    elif score_input =="dreier":get_points(player,3)
+    elif score_input =="aces":get_points(player,1)        
+    elif score_input =="twos":get_points(player,2)
+    elif score_input =="threes":get_points(player,3)
     elif score_input =="vierer":get_points(player,4)
-    elif score_input =="fünfer":get_points(player,5)
-    elif score_input =="sechser":get_points(player,6)
-    elif score_input =="dreier pasch":get_points(player,33)
-    elif score_input =="vierer pasch":get_points(player,44)
+    elif score_input =="fives":get_points(player,5)
+    elif score_input =="sixex":get_points(player,6)
+    elif score_input =="3 of kind":get_points(player,33)
+    elif score_input =="4 of kind":get_points(player,44)
     elif score_input =="full house":get_points(player,25)
-    elif score_input =="kleine straße":get_points(player,30)
-    elif score_input =="große straße":get_points(player,40)
+    elif score_input =="small straight":get_points(player,30)
+    elif score_input =="large straight":get_points(player,40)
     elif score_input =="kniffel":get_points(player,50)    
-    elif score_input == "chance":get_points(player,77)
+    elif score_input ==  "chance":get_points(player,77)
     else:
         score_points(player)
 
@@ -345,7 +345,7 @@ def get_points(player,wich):
                     x += point
                 table.dreier_pasch = x
             if tempbool == False:
-                input7 = input("du hast kein dreier pasch, willst du 0 punkte, schreib 0:")
+                input7 = input("you dont have 3 of kind, you want to put 0 in 3 of kind, type 0:")
                 if input7 == "0": table.dreier_pasch =0
                 else:score_points(player)
             else: tempbool = False
@@ -361,7 +361,7 @@ def get_points(player,wich):
                     x += point
                 table.vierer_pasch = x
             if tempbool == False:
-                input7 = input("du hast kein vierer pasch, willst du 0 punkte, schreib 0:")
+                input7 = input("you dont have 4 of kind, you want to put 0 in 4 of kind, type 0:")
                 if input7 == "0": table.vierer_pasch =0
                 else:score_points(player)
             else: tempbool = False
@@ -377,7 +377,7 @@ def get_points(player,wich):
                     temp2 = 2
             if temp1==3 and temp2==2: table.full_house=25
             else:
-                input3 = input("du hast kein full house willst du 0 punkte, schreib 0:")
+                input3 = input("you dont have a full house, you want to put 0 in full house, type 0:")
                 if input3 =="0": table.full_house=0
                 else:score_points(player)
     elif wich == 30:
@@ -386,7 +386,7 @@ def get_points(player,wich):
             if 1 in saved_dice and 2 in saved_dice and 3 in saved_dice and 4 in saved_dice and 5 in saved_dice:
                 table.kleine_strasse = 30
             else:
-                input8 = input("du hast keine kleine straße willst du 0 punkte, schreib 0:")
+                input8 = input("you dont have a small straight, you want to put 0 in small straight, type 0:")
                 if input8 == 0: table.kleine_strasse =0
                 else: score_points(player)
     elif wich == 40:
@@ -395,7 +395,7 @@ def get_points(player,wich):
             if 6 in saved_dice and 2 in saved_dice and 3 in saved_dice and 4 in saved_dice and 5 in saved_dice:
                 table.grosse_strasse = 30
             else:
-                input9 = input("du hast keine große straße willst du 0 punkte, schreib 0:")
+                input9 = input("you dont have a large straight, you want to put 0 in large straight, type 0:")
                 if input9 == 0: table.grosse_strasse =0
                 else: score_points(player)
     elif wich == 50:
@@ -413,7 +413,7 @@ def get_points(player,wich):
                 table.kniffel = 50
             else:
                 nose = True
-                input10 = input("du hast kein kniffel willst du 0 punkte, schreib 0:")
+                input10 = input("you dont have a kniffel, you want to put 0 in kniffel, type 0:")
                 if input10 == 0: table.kniffel = 0
                 else:score_points(player)
                         
@@ -425,7 +425,7 @@ def get_points(player,wich):
                 x += point
             table.chance = x
     table.print_table()
-    sanother_input = input("weiter?"+"\n")
+    sanother_input = input("go on?"+"\n")
     
     saved_dice.clear()
     die_1.unsave_die()
@@ -491,8 +491,10 @@ def end_game():
     if points_pl_2 > points_pl_1 and points_pl_2>points_pl_3 and points_pl_2>points_pl_4:print("!!!Player 2 wins!!!")
     if points_pl_3 > points_pl_2 and points_pl_3>points_pl_1 and points_pl_3>points_pl_4:print("!!!Player 3 wins!!!")
     if points_pl_4 > points_pl_2 and points_pl_4>points_pl_3 and points_pl_4>points_pl_1:print("!!!Player 4 wins!!!")
-    input25 = input("neue runde?(ja/nein)")
-    if input25 =="ja":start_game()
+    input25 = input("want to play another round?(yes/no)")
+    if input25 =="yes":
+        ask_for_players()
+        start_game()
     else: exit()
 
 
