@@ -45,7 +45,7 @@ def ask_for_players():
     if spieler == "exit":exit()
     #elif spieler is not range(1,4,1):ask_for_players()
     if int(spieler) >4 : spieler = "4"
-    print("so " +spieler + " play today."+"\n")
+    print("so " +spieler + " players today."+"\n")
     players = int(spieler)
 
 ask_for_players()
@@ -274,7 +274,7 @@ def score_points(player):
           "roll 4: " +str(saved_dice[3])+"\n"+
           "roll 5: " +str(saved_dice[4])+"\n"
           )
-    score_input = input("where do you wanne put your score: ")
+    score_input = input("where do you wanne put your score: ").lower()
     if score_input == "exit":exit()
     elif score_input =="aces":get_points(player,1)        
     elif score_input =="twos":get_points(player,2)
@@ -447,7 +447,7 @@ def throw_dice(würfel):
 def start_game():
     rounds = 14
     for round in range (0,rounds,1):
-        for pl in range(0,players+1,1):
+        for pl in range(0,players,1):
             player_turn(pl+1)
     end_game()
 

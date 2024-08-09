@@ -1,29 +1,31 @@
 import random
 
 print ("""
-       Willkommen zu lordy_prods Kniffel
+    !!!Willkommen zu lordy_prods Kniffel!!!
     
-    Dies ist mein Kniffel spiel in Python Terminal.
-    Schreibt zahlen wenn diese gefragt sind zum Beispiel
-    wenn gefragt ist welche Würfel man behalten möchte.
-    wird nur 1 2 3 4 5 6 erkannt und einfach ohne freistellen
-    eingeben zum Beispiel '123', behält Würfel 1 2 und 3.
-    Zur frage wo die punkte eingeben werden bitte mit 
-       katogorie der punkte antworten z.B. 
-       'einser' gibt punkte für nur einser, 
-       'full house' gibt punkte für Full House.
+        Dies ist mein Kniffel spiel in Python Terminal.
+        Schreibt zahlen wenn diese gefragt sind zum Beispiel
+        wenn gefragt ist welche Würfel man behalten möchte.
+        wird nur 1 2 3 4 5 6 erkannt und einfach ohne freistellen
+        eingeben zum Beispiel '123', behält Würfel 1 2 und 3.
+        Zur frage wo die punkte eingeben werden bitte mit 
+        katogorie der punkte antworten z.B. 
+        'einser' gibt punkte für einser, 
+        'full house' gibt punkte für Full House.
 
-       Viel Spaß!!!
+    !!!Viel Spaß!!!
+       (Schreib 'exit' in einen input prompt wenn du das Spiel
+       beenden willst!)
 
        """)
 players = 1
 
 def ask_for_players():
-    spieler = input("wieviele mitspieler gibt es heute?(max 4)(eingeben:1,2,3,4:)")
+    spieler = input("Wieviele Mitspieler gibt es Heute?(max 4)(eingeben:1,2,3,4):")
     if spieler == "exit":exit()
     #elif spieler is not range(1,4,1):ask_for_players()
     if int(spieler) >4 : spieler = "4"
-    print("also: " +spieler + " spielen heute mit.")
+    print("Also " +spieler + " spielen Heute mit.")
     players = int(spieler)
 
 ask_for_players()
@@ -54,12 +56,12 @@ class pointtable:
 
     def print_table(self):
         print("player: "+str(self.my_player))
-        print("nur einser: " +str(self.points_einser))
-        print("nur zweier: " +str(self.points_zweier))
-        print("nur dreier: " +str(self.points_dreier))
-        print("nur vierer: " +str(self.points_vierer))
-        print("nur fünfer: " +str(self.points_fünfer))
-        print("nur sechser: " + str(self.points_sechser))
+        print("einser: " +str(self.points_einser))
+        print("zweier: " +str(self.points_zweier))
+        print("dreier: " +str(self.points_dreier))
+        print("vierer: " +str(self.points_vierer))
+        print("fünfer: " +str(self.points_fünfer))
+        print("sechser: " + str(self.points_sechser))
         print("dreier pasch: " + str(self.dreier_pasch))
         print("vierer pasch: " + str(self.vierer_pasch))
         print("full house: " + str(self.full_house))
@@ -199,7 +201,7 @@ def player_turn(player):
         if len(würfel) == 0:break
         if count == 2:
             input24 = input("weiter?"+"\n")
-            back=input("welche würfel wieder würfeln?"+str(würfel_out)+":")
+            back=input("Welche Würfel wieder würfeln?"+str(würfel_out)+":")
             if back =="exit":exit()
             #reverses the poping of a dice to put it back in the dice pool
             for number in back:
@@ -246,13 +248,13 @@ def score_points(player):
         table = player_4_points
     table.print_table()
     print("dein gewerteter wurf: "+"\n"
-          "würfel 1: "+str(saved_dice[0])+"\n"+
-          "würfel 2: " +str(saved_dice[1])+"\n"+
-          "würfel 3: " +str(saved_dice[2])+"\n"+
-          "würfel 4: " +str(saved_dice[3])+"\n"+
-          "würfel 5: " +str(saved_dice[4])+"\n"
+          "wurf 1: "+str(saved_dice[0])+"\n"+
+          "wurf 2: " +str(saved_dice[1])+"\n"+
+          "wurf 3: " +str(saved_dice[2])+"\n"+
+          "wurf 4: " +str(saved_dice[3])+"\n"+
+          "wurf 5: " +str(saved_dice[4])+"\n"
           )
-    score_input = input("wo möchtest du dein punkte eintragen: ")
+    score_input= input("Wo möchtest du deine Punkte eintragen: ").lower() 
     if score_input == "exit":exit()
     elif score_input =="einser":get_points(player,1)        
     elif score_input =="zweier":get_points(player,2)
@@ -323,7 +325,7 @@ def get_points(player,wich):
                     x += point
                 table.dreier_pasch = x
             if tempbool == False:
-                input7 = input("du hast kein dreier pasch, willst du 0 punkte, schreib 0:")
+                input7 = input("Du hast kein dreier Pasch, willst du 0 Punkte, schreib 0:")
                 if input7 == "0": table.dreier_pasch =0
                 else:score_points(player)
             else: tempbool = False
@@ -339,7 +341,7 @@ def get_points(player,wich):
                     x += point
                 table.vierer_pasch = x
             if tempbool == False:
-                input7 = input("du hast kein vierer pasch, willst du 0 punkte, schreib 0:")
+                input7 = input("Du hast kein vierer Pasch, willst du 0 Punkte, schreib 0:")
                 if input7 == "0": table.vierer_pasch =0
                 else:score_points(player)
             else: tempbool = False
@@ -355,7 +357,7 @@ def get_points(player,wich):
                     temp2 = 2
             if temp1==3 and temp2==2: table.full_house=25
             else:
-                input3 = input("du hast kein full house willst du 0 punkte, schreib 0:")
+                input3 = input("Du hast kein Full House willst du 0 Punkte, schreib 0:")
                 if input3 =="0": table.full_house=0
                 else:score_points(player)
     elif wich == 30:
@@ -364,7 +366,7 @@ def get_points(player,wich):
             if 1 in saved_dice and 2 in saved_dice and 3 in saved_dice and 4 in saved_dice and 5 in saved_dice:
                 table.kleine_strasse = 30
             else:
-                input8 = input("du hast keine kleine straße willst du 0 punkte, schreib 0:")
+                input8 = input("Du hast keine kleine Straße willst du 0 Punkte, schreib 0:")
                 if input8 == 0: table.kleine_strasse =0
                 else: score_points(player)
     elif wich == 40:
@@ -373,7 +375,7 @@ def get_points(player,wich):
             if 6 in saved_dice and 2 in saved_dice and 3 in saved_dice and 4 in saved_dice and 5 in saved_dice:
                 table.grosse_strasse = 30
             else:
-                input9 = input("du hast keine große straße willst du 0 punkte, schreib 0:")
+                input9 = input("Du hast keine große Straße willst du 0 Punkte, schreib 0:")
                 if input9 == 0: table.grosse_strasse =0
                 else: score_points(player)
     elif wich == 50:
@@ -391,7 +393,7 @@ def get_points(player,wich):
                 table.kniffel = 50
             else:
                 nose = True
-                input10 = input("du hast kein kniffel willst du 0 punkte, schreib 0:")
+                input10 = input("Du hast kein Kniffel willst du 0 Punkte, schreib 0:")
                 if input10 == 0: table.kniffel = 0
                 else:score_points(player)
                         
@@ -425,7 +427,7 @@ def throw_dice(würfel):
 def start_game():
     rounds = 14
     for round in range (0,rounds,1):
-        for pl in range(0,players+1,1):
+        for pl in range(0,players,1):
             player_turn(pl+1)
     end_game()
 
@@ -465,12 +467,14 @@ def end_game():
     print("player 2: "+str(points_pl_2))
     print("player 3: "+str(points_pl_3))   
     print("player 4: "+str(points_pl_4))
-    if points_pl_1 > points_pl_2 and points_pl_1>points_pl_3 and points_pl_1>points_pl_4:print("!!!Player 1 wins!!!")
-    if points_pl_2 > points_pl_1 and points_pl_2>points_pl_3 and points_pl_2>points_pl_4:print("!!!Player 2 wins!!!")
-    if points_pl_3 > points_pl_2 and points_pl_3>points_pl_1 and points_pl_3>points_pl_4:print("!!!Player 3 wins!!!")
-    if points_pl_4 > points_pl_2 and points_pl_4>points_pl_3 and points_pl_4>points_pl_1:print("!!!Player 4 wins!!!")
+    if points_pl_1 > points_pl_2 and points_pl_1>points_pl_3 and points_pl_1>points_pl_4:print("!!!Player 1 gewinnt!!!")
+    if points_pl_2 > points_pl_1 and points_pl_2>points_pl_3 and points_pl_2>points_pl_4:print("!!!Player 2 gewinnt!!!")
+    if points_pl_3 > points_pl_2 and points_pl_3>points_pl_1 and points_pl_3>points_pl_4:print("!!!Player 3 gewinnt!!!")
+    if points_pl_4 > points_pl_2 and points_pl_4>points_pl_3 and points_pl_4>points_pl_1:print("!!!Player 4 gewinnt!!!")
     input25 = input("neue runde?(ja/nein)")
-    if input25 =="ja":start_game()
+    if input25 =="ja":
+        ask_for_players()
+        start_game()
     else: exit()
 
 
